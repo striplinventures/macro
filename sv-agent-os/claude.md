@@ -11,9 +11,11 @@ company. Amway IBO in the Yager Group / InterNET Services system since
 3/17/2022.
 
 - Personal background and story: `context/about_me.md`
-- Company, Amway position, numbers, compliance: `context/business_info.md`
+- Company, Amway position, team standards, compliance: `context/business_info.md`
 - Tone and brand system: `context/brand_voice.md`
 - Every offer and its economics: `context/offer_catalog.md`
+- Amway comp plan reference: `context/compensation_plan.md` — internal only, the
+  source guide is marked "For IBO use only. Not for use with prospects."
 
 ## The 60-day objective (current sprint)
 
@@ -44,7 +46,8 @@ hard wall, and not an excuse to blend the two pitches.
 1. This file.
 2. Shared context: `context/business_info.md`, `context/brand_voice.md`,
    `context/offer_catalog.md` (and `context/about_me.md` when the output is
-   personal — story, script, outreach in my voice).
+   personal — story, script, outreach in my voice; `context/compensation_plan.md`
+   whenever PV, BV, bonuses, or qualification levels are involved).
 3. The department for this task:
    - Partner work → `partners/context/icp.md` + `partners/skills/`
    - Rep work → `reps/context/icp.md` + `reps/skills/`
@@ -54,10 +57,18 @@ hard wall, and not an excuse to blend the two pitches.
 
 Skills are SOPs. Load the one that matches the task and follow it as written.
 
-- `partners/skills/qualification_process.md` — Yager 8-step pattern, MG1,
-  gating material, objection handling.
+- `partners/skills/connecting.md` — Names List, Make Aware, Door to Mentorship,
+  call back scripts, and the A-List customer conversation.
+- `partners/skills/qualification_process.md` — the full meeting sequence from MG1
+  through the offer, including MG1's 8 qualifying questions, gating material, and
+  objection handling.
+- `partners/skills/launch_process.md` — Phase A's six launch sessions and Phases
+  B–D.
 - `reps/skills/sales_script.md` — NEPQ-based eSpring script, PFAS opener,
   segment-by-segment pitch, rep onboarding checklist.
+
+The Yager scripts are memorized material, not templates. Use the wording as
+written; don't paraphrase a script into something that sounds better.
 
 When I re-explain the same thing to you twice, that's a missing skill. Write it
 into the right `skills/` folder instead of answering it again from scratch.

@@ -39,8 +39,17 @@ file — write it there instead of re-typing it here.
   identified on that run — build the bottles + dip test kits **before** anyone
   goes out; now step 1 of rep onboarding. Add the real date next time this file
   is opened.
-- Open item — MG1's exact 8 questions aren't written down anywhere. Dictate them
-  once into `partners/skills/qualification_process.md` and stop re-deriving them.
+- 2026-08-12 — Closed: MG1's 8 qualifying questions are now written down in
+  `partners/skills/qualification_process.md`, from the Yager Qualification
+  Process document. Stop re-deriving them.
+- 2026-08-12 — Added the Yager Qualification Process doc (26 pp.) and the Amway
+  Money & Rewards guide to the OS: connecting scripts, the full meeting sequence,
+  the launch sessions, and `context/compensation_plan.md`.
+- **Open question — where does the Amway CUSTOMER track live?** The OS has two
+  departments (partners, reps), but the Yager material assumes CUSTOMER (A-List /
+  My Shop) and PARTNER. The A-List customer script is parked at the bottom of
+  `partners/skills/connecting.md` for now. Decide whether customers get their own
+  department or stay folded into the partner track.
 - Open item — `context/about_me.md` is a stub. The personal-story details it
   lists get used in scripts; until they're filled in, story-driven copy gets
   flagged rather than invented.

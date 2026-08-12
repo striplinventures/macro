@@ -46,8 +46,32 @@ friends, make a difference" model, not just a product income stream.
 team building, and the incentive-trip structure — screened for character, work
 ethic, coachability, and integrity.
 
-**The gate:** the full 8-step qualification pattern. The gate *is* the offer's
-quality control — see `../partners/skills/qualification_process.md`.
+**The gate:** the full qualification pattern —
+`Conversation → MA → DTM → MG1 → MG2 → OV1 → FT1 → OV2 → FT2 → Pre-Offer → Offer`.
+The gate *is* the offer's quality control — see
+`../partners/skills/qualification_process.md`.
+
+**What the candidate is actually committing to** (laid out at FT2, before any
+offer is made):
+
+| Commitment | Amount |
+|---|---|
+| Time | 12–14 hours/week, over 5 years |
+| Getting set up in business | ~$225 product stack at the first launch meeting |
+| First-year mentorship education | ~$150/month |
+| — seminars | $30/month per person |
+| — conventions | $190/quarter per person |
+| — audios, books, app, training site | $90/month |
+| Volume standard | 150 PV with 60% VCS |
+
+Education options continue at their own expense after one year from
+registration. Financial commitments also include their own store purchases and
+business operating expenses.
+
+**What they get:** mentorship and coaching, the education and support system, the
+launch sequence (six 90-minute sessions over 14 days), and the team's incentive
+trip structure. Mentorship is **not** required to register with Amway — what the
+candidate qualifies for is participation in the mentorship education program.
 
 **Success metric:** partners who duplicate the pattern themselves, not partners
 who buy.

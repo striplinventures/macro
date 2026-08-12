@@ -1,11 +1,29 @@
 # Partner Track — Ideal Candidate Profile
 
+## The selection mindset
+
+> We are the **Selectors/Buyers, not the Sellers.**
+
+We are not taking on employees, we are taking on business partners — and we are
+not looking for financing, we are well capitalized. Careful selection is what
+produces a team that becomes a profitable asset. We can only help someone who is
+hungry and drawn to working with a mentor. Every action and conversation through
+the whole process has to stay consistent with that posture.
+
 ## Who qualifies
 
 People with entrepreneurial drive who want the full "make money, make friends,
 make a difference" model — not just a product income stream. Screen for
 character, work ethic, coachability, and integrity over any existing credential
 or resume.
+
+### The five qualities we evaluate
+
+**Reliability · Trustworthiness · Willingness to Learn · Persistence · Hunger**
+
+These are the criteria the Yager qualification process is built to test. Every
+step in `../skills/qualification_process.md` is a read on one or more of them —
+which is why skipping steps destroys the signal.
 
 ## Signals this is a partner candidate, not a rep candidate
 

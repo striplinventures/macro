@@ -31,9 +31,23 @@ site commits to dark, and anything branded should too.
 | Role | Stack |
 |---|---|
 | Display | `"Anton", "Helvetica Neue", Impact, sans-serif` |
-| Display alt | `"Antonio", "Anton", "Impact", "Helvetica Neue", sans-serif` — the tighter cut used for the "GOT PFAS?" treatment |
+| Display alt | `"Antonio", "Anton", "Impact", "Helvetica Neue", sans-serif` — the tighter cut used for the big titles |
 | Body | `"DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif` |
 | Mono | `"Space Mono", ui-monospace, monospace` |
+
+**Where the fonts come from.** The site loads them from Google Fonts in
+`src/routes/__root.tsx`, with these exact weights:
+
+```
+https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap
+```
+
+Anton 400 · Antonio 400/700 · DM Sans 400/500/600/700 · Space Mono 400/700.
+
+Anything that can't reach that CDN — a published artifact, an emailed document,
+a slide deck — needs the `.woff2` files embedded instead. Keep a copy of the four
+families somewhere retrievable so branded output doesn't silently fall back to
+Impact.
 
 Setting that carries the identity:
 

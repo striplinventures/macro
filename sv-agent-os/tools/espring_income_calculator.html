@@ -5,148 +5,198 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>eSpring Income Model</title>
 <style>
+  /* ---------- tokens: light (also the un-stamped default) ---------- */
   :root{
-    --bg:#f6f7f9; --panel:#ffffff; --ink:#12151a; --muted:#5b6472;
-    --line:#e2e6ec; --accent:#0b6ab0; --accent-soft:#e8f2fa;
-    --good:#0f7a52; --good-soft:#e6f4ee; --warn:#8a5a00; --warn-soft:#fdf3dd;
-    --warn-line:#e8c988; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.10);
-    --radius:12px;
+    --bg:#f4f6f6; --panel:#ffffff; --sunk:#eef2f3;
+    --ink:#0e1a20; --muted:#5a6b73; --line:#dde4e6; --line-strong:#c3d0d4;
+    --accent:#0e6d86; --accent-soft:#e4f0f3;
+    --good:#146b4d;  --good-soft:#e3f1eb;
+    --warn:#8a5300;  --warn-soft:#fbf0dc; --warn-line:#e5c68b;
+    --shadow:0 1px 2px rgba(14,26,32,.05), 0 2px 8px rgba(14,26,32,.05);
+
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,monospace;
+    --r:10px;
   }
-  :root:not([data-theme="light"]){ }
-  @media (prefers-color-scheme: dark){
+  @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#0f1216; --panel:#171b21; --ink:#e8ecf1; --muted:#98a2b3;
-      --line:#262d36; --accent:#4aa8e8; --accent-soft:#12212e;
-      --good:#4ecb98; --good-soft:#10231b; --warn:#e8b964; --warn-soft:#2a2113;
-      --warn-line:#5c4a22; --shadow:0 1px 2px rgba(0,0,0,.4);
+      --bg:#0b1216; --panel:#131c21; --sunk:#0f171c;
+      --ink:#e4ecef; --muted:#8ea1a9; --line:#223037; --line-strong:#324450;
+      --accent:#4fb8d4; --accent-soft:#0f2830;
+      --good:#55c99b;  --good-soft:#0d241c;
+      --warn:#e0b269;  --warn-soft:#291f10; --warn-line:#55452a;
+      --shadow:0 1px 2px rgba(0,0,0,.45);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0f1216; --panel:#171b21; --ink:#e8ecf1; --muted:#98a2b3;
-    --line:#262d36; --accent:#4aa8e8; --accent-soft:#12212e;
-    --good:#4ecb98; --good-soft:#10231b; --warn:#e8b964; --warn-soft:#2a2113;
-    --warn-line:#5c4a22; --shadow:0 1px 2px rgba(0,0,0,.4);
+    --bg:#0b1216; --panel:#131c21; --sunk:#0f171c;
+    --ink:#e4ecef; --muted:#8ea1a9; --line:#223037; --line-strong:#324450;
+    --accent:#4fb8d4; --accent-soft:#0f2830;
+    --good:#55c99b;  --good-soft:#0d241c;
+    --warn:#e0b269;  --warn-soft:#291f10; --warn-line:#55452a;
+    --shadow:0 1px 2px rgba(0,0,0,.45);
   }
 
   *{box-sizing:border-box}
   body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 64px}
-  h1{font-size:1.6rem;line-height:1.25;margin:0 0 4px;letter-spacing:-.02em}
-  h2{font-size:1.05rem;margin:0 0 12px;letter-spacing:-.01em}
-  .sub{color:var(--muted);margin:0 0 20px;font-size:.95rem}
+  .wrap{max-width:1060px;margin:0 auto;padding:40px 22px 72px;display:flex;flex-direction:column;gap:20px}
 
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-        box-shadow:var(--shadow);padding:20px;margin-bottom:18px}
+  /* ---------- masthead ---------- */
+  .mast{display:flex;flex-direction:column;gap:6px;padding-bottom:18px;
+        border-bottom:2px solid var(--line-strong)}
+  .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;
+           color:var(--accent);font-weight:700}
+  h1{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.5rem);line-height:1.1;
+     margin:0;letter-spacing:-.015em;font-weight:600;text-wrap:balance}
+  .standfirst{color:var(--muted);font-size:.95rem;max-width:62ch;margin:0}
 
-  /* ---- unverified banner ---- */
+  h2{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:0 0 14px;
+     letter-spacing:-.01em}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+        box-shadow:var(--shadow);padding:22px}
+
+  /* ---------- unverified banner ---------- */
   .banner{background:var(--warn-soft);border:1px solid var(--warn-line);color:var(--warn);
-          border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;font-size:.9rem}
-  .banner strong{display:block;margin-bottom:4px;font-size:.95rem}
-  .banner.hidden{display:none}
+          border-radius:var(--r);padding:15px 17px;font-size:.875rem;line-height:1.5}
+  .banner strong{display:block;margin-bottom:5px;font-size:.9rem;letter-spacing:.01em}
+  .banner[hidden]{display:none}
 
-  /* ---- inputs ---- */
-  .grid{display:grid;gap:14px}
-  .grid.cols3{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
-  .grid.cols2{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-  label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);
-        margin-bottom:5px;letter-spacing:.01em}
+  /* ---------- control strip ---------- */
+  .controls{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  label{display:block;font-size:.72rem;font-weight:700;color:var(--muted);
+        text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
   input[type=number]{
-    width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;
-    background:var(--bg);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums;
+    width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:8px;
+    background:var(--sunk);color:var(--ink);font-family:var(--mono);font-size:.95rem;
+    font-variant-numeric:tabular-nums;
   }
-  input[type=number]:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
-  .hint{font-size:.72rem;color:var(--muted);margin-top:4px;line-height:1.35}
-  .unverified{color:var(--warn);font-weight:600}
+  input[type=number]:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .hint{font-size:.72rem;color:var(--muted);margin-top:5px;line-height:1.4}
+  .flag{color:var(--warn);font-weight:600}
 
-  /* ---- results ---- */
-  .scen{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .scenario{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
-  .scenario header{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--accent-soft)}
-  .scenario.team header{background:var(--good-soft)}
-  .scenario header .t{font-weight:700;font-size:1rem}
-  .scenario header .d{font-size:.8rem;color:var(--muted);margin-top:2px}
-  .figs{padding:6px 18px 14px}
-  .fig{display:flex;justify-content:space-between;align-items:baseline;
-       padding:11px 0;border-bottom:1px solid var(--line)}
+  /* ---------- readouts ---------- */
+  .readouts{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .readout{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);
+           box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .readout > header{padding:15px 20px;border-bottom:1px solid var(--line);
+                    background:var(--accent-soft)}
+  .readout.team > header{background:var(--good-soft)}
+  .rt{font-family:var(--serif);font-size:1.1rem;font-weight:600}
+  .rd{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:3px;
+      letter-spacing:-.01em}
+  .figs{padding:4px 20px 16px}
+  .fig{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+       padding:12px 0;border-bottom:1px solid var(--line)}
   .fig:last-child{border-bottom:none}
-  .fig .k{font-size:.85rem;color:var(--muted)}
-  .fig .v{font-size:1.45rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-  .fig.hero .v{font-size:2rem;color:var(--accent)}
-  .scenario.team .fig.hero .v{color:var(--good)}
+  .fig .k{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+          font-weight:600}
+  .fig .v{font-family:var(--serif);font-size:1.5rem;font-weight:600;
+          font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .fig.hero{padding:18px 0 14px}
+  .fig.hero .v{font-size:clamp(2.1rem,5vw,2.7rem);color:var(--accent);line-height:1}
+  .readout.team .fig.hero .v{color:var(--good)}
 
-  /* ---- breakdown ---- */
-  table{width:100%;border-collapse:collapse;font-size:.88rem}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
-  th{font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
-  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-  tr.total td{font-weight:700;border-top:2px solid var(--line);border-bottom:none}
+  /* ---------- derivation ---------- */
   .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.875rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;
+                white-space:nowrap}
+  tr.total td{font-weight:700;border-top:2px solid var(--line-strong);border-bottom:none;
+              padding-top:12px}
+  tr.total td.num{font-size:1rem}
+  .srcname{font-weight:600}
+  .srcmath{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:3px}
 
-  details{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
-          margin-bottom:18px;box-shadow:var(--shadow)}
-  summary{padding:14px 20px;cursor:pointer;font-weight:600;font-size:.95rem;list-style:none}
+  .note{font-size:.87rem;color:var(--muted);margin:14px 0 0;max-width:70ch;line-height:1.55}
+  .note em{color:var(--ink);font-style:normal;font-weight:600}
+
+  /* ---------- rates panel ---------- */
+  details{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);
+          box-shadow:var(--shadow)}
+  summary{padding:15px 22px;cursor:pointer;font-weight:600;font-size:.93rem;list-style:none}
   summary::-webkit-details-marker{display:none}
-  summary::before{content:"▸ ";color:var(--muted)}
-  details[open] summary::before{content:"▾ "}
-  details .body{padding:0 20px 20px}
+  summary::before{content:"▸";color:var(--accent);display:inline-block;width:1.1em;font-size:.85em}
+  details[open] summary::before{content:"▾"}
+  summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:var(--r)}
+  details .body{padding:0 22px 22px;display:flex;flex-direction:column;gap:8px}
+  #schedTable input{padding:6px 9px;font-size:.85rem;max-width:130px}
 
-  .disclosure{font-size:.78rem;color:var(--muted);line-height:1.55;
-              border-top:1px solid var(--line);padding-top:16px;margin-top:8px}
+  .chk{display:flex;gap:10px;align-items:flex-start;font-size:.87rem;margin-top:16px;
+       padding:14px;background:var(--sunk);border-radius:8px;line-height:1.5}
+  .chk input{margin-top:4px;flex-shrink:0;width:16px;height:16px;accent-color:var(--accent)}
+
+  /* ---------- disclosure ---------- */
+  .disclosure{font-size:.8rem;color:var(--muted);line-height:1.6;max-width:78ch;
+              display:flex;flex-direction:column;gap:12px}
   .disclosure strong{color:var(--ink)}
-  .chk{display:flex;gap:9px;align-items:flex-start;font-size:.85rem;margin-top:14px}
-  .chk input{margin-top:3px;flex-shrink:0}
-  .note{font-size:.82rem;color:var(--muted);margin:10px 0 0}
-  @media print{ .noprint{display:none} body{background:#fff} .card,.scenario{box-shadow:none} }
+  .disclosure p{margin:0}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} }
+  @media print{
+    .noprint{display:none}
+    body{background:#fff;font-size:12pt}
+    .card,.readout{box-shadow:none}
+    .wrap{padding:0}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <h1>eSpring Income Model</h1>
-  <p class="sub">A hypothetical illustration of the Amway compensation plan &mdash; not a projection of actual or average earnings.</p>
-
-  <div class="banner" id="banner">
-    <strong>⚠ Plan rates below are unverified placeholders</strong>
-    The price, PV, BV and bonus figures pre-loaded here are <em>structural placeholders</em>, not
-    confirmed Amway numbers. Open <b>Plan Rates</b>, replace every value from your current official
-    Amway Business Reference Guide / product listing, then tick the confirm box to clear this notice.
-    Do not show this to a prospect until you have done that.
+  <div class="mast">
+    <div class="eyebrow">Amway compensation plan · hypothetical illustration</div>
+    <h1>eSpring Income Model</h1>
+    <p class="standfirst">
+      How the plan calculates income at a chosen level of product sales &mdash; not a
+      projection of actual or average earnings.
+    </p>
   </div>
 
-  <!-- ============ SCENARIO INPUTS ============ -->
+  <div class="banner" id="banner">
+    <strong>⚠ The plan rates below are unverified placeholders</strong>
+    The price, PV, BV and bonus figures pre-loaded here are structural placeholders, not
+    confirmed Amway numbers. Open <b>Plan Rates</b>, replace every value from your current
+    official Amway Business Reference Guide and product listing, then tick the confirm box
+    to clear this notice. Do not show this page to anyone until you have.
+  </div>
+
+  <!-- ============ CONTROLS ============ -->
   <div class="card noprint">
     <h2>The scenario</h2>
-    <div class="grid cols3">
+    <div class="controls">
       <div>
-        <label for="units">eSpring units you sell / month</label>
+        <label for="units">Units you sell / month</label>
         <input type="number" id="units" value="10" min="0" step="1">
       </div>
       <div>
-        <label for="team">People on your team selling</label>
+        <label for="team">People on your team</label>
         <input type="number" id="team" value="10" min="0" step="1">
       </div>
       <div>
-        <label for="teamUnits">Units each of them sells / month</label>
+        <label for="teamUnits">Units each of them sells</label>
         <input type="number" id="teamUnits" value="10" min="0" step="1">
       </div>
       <div>
-        <label for="hours">Hours you work / week</label>
+        <label for="hours">Your hours / week</label>
         <input type="number" id="hours" value="10" min="1" step="1">
         <div class="hint">Used only to express the result as an hourly rate.</div>
       </div>
     </div>
   </div>
 
-  <!-- ============ RESULTS ============ -->
-  <div class="scen" id="scen">
-    <div class="scenario">
+  <!-- ============ READOUTS ============ -->
+  <div class="readouts">
+    <div class="readout">
       <header>
-        <div class="t">Just you</div>
-        <div class="d" id="soloDesc">&nbsp;</div>
+        <div class="rt">Just you</div>
+        <div class="rd" id="soloDesc">&nbsp;</div>
       </header>
       <div class="figs">
         <div class="fig hero"><span class="k">Per month</span><span class="v" id="s_month">&mdash;</span></div>
@@ -155,10 +205,10 @@
         <div class="fig"><span class="k">Per hour</span><span class="v" id="s_hour">&mdash;</span></div>
       </div>
     </div>
-    <div class="scenario team">
+    <div class="readout team">
       <header>
-        <div class="t">You + your team</div>
-        <div class="d" id="teamDesc">&nbsp;</div>
+        <div class="rt">You + your team</div>
+        <div class="rd" id="teamDesc">&nbsp;</div>
       </header>
       <div class="figs">
         <div class="fig hero"><span class="k">Per month</span><span class="v" id="t_month">&mdash;</span></div>
@@ -169,7 +219,7 @@
     </div>
   </div>
 
-  <!-- ============ WHERE IT COMES FROM ============ -->
+  <!-- ============ DERIVATION ============ -->
   <div class="card">
     <h2>Where the money comes from</h2>
     <div class="tblwrap">
@@ -188,39 +238,39 @@
   </div>
 
   <!-- ============ PLAN RATES ============ -->
-  <details class="noprint" id="ratesPanel">
-    <summary>Plan Rates &mdash; verify these before showing anyone</summary>
+  <details class="noprint">
+    <summary>Plan Rates &mdash; verify before showing anyone</summary>
     <div class="body">
       <p class="note" style="margin-top:0">
         Every number here comes from Amway, not from this tool. Pull them from your current
         Business Reference Guide and the live eSpring product listing for your market.
       </p>
 
-      <h2 style="margin-top:20px">eSpring unit economics</h2>
-      <div class="grid cols2">
+      <h2 style="margin-top:18px">eSpring unit economics</h2>
+      <div class="controls">
         <div>
-          <label for="retail">Retail price you sell at ($)</label>
+          <label for="retail">Retail price ($)</label>
           <input type="number" id="retail" value="1400" min="0" step="1">
-          <div class="hint unverified">Placeholder — verify</div>
+          <div class="hint flag">Placeholder — verify</div>
         </div>
         <div>
-          <label for="cost">Your cost as an IBO ($)</label>
+          <label for="cost">Your IBO cost ($)</label>
           <input type="number" id="cost" value="1180" min="0" step="1">
-          <div class="hint unverified">Placeholder — verify</div>
+          <div class="hint flag">Placeholder — verify</div>
         </div>
         <div>
           <label for="pv">PV per unit</label>
           <input type="number" id="pv" value="106" min="0" step="0.01">
-          <div class="hint unverified">Placeholder — verify</div>
+          <div class="hint flag">Placeholder — verify</div>
         </div>
         <div>
           <label for="bv">BV per unit ($)</label>
           <input type="number" id="bv" value="330" min="0" step="0.01">
-          <div class="hint unverified">Placeholder — verify</div>
+          <div class="hint flag">Placeholder — verify</div>
         </div>
       </div>
 
-      <h2 style="margin-top:24px">Performance Bonus schedule</h2>
+      <h2 style="margin-top:22px">Performance Bonus schedule</h2>
       <p class="note" style="margin-top:0">
         Monthly group PV determines your bonus percentage. Edit any row to match your
         current schedule.
@@ -231,37 +281,48 @@
           <tbody id="schedBody"></tbody>
         </table>
       </div>
-      <div class="hint unverified" style="margin-top:8px">
-        Placeholder schedule reflecting the commonly published North American bracket structure — verify every row.
+      <div class="hint flag">
+        Placeholder schedule reflecting the commonly published North American bracket
+        structure — verify every row.
       </div>
 
-      <label class="chk">
+      <label class="chk" for="confirm">
         <input type="checkbox" id="confirm">
-        <span>I have replaced every figure above with the current official numbers from my own
-        Amway materials, and I have the Amway Income Disclosure Statement on hand to show alongside this.</span>
+        <span>I have replaced every figure above with current official numbers from my own
+        Amway materials, and I have the Amway Income Disclosure Statement on hand to show
+        alongside this.</span>
       </label>
     </div>
   </details>
 
   <!-- ============ DISCLOSURE ============ -->
   <div class="card">
+    <h2>Income disclosure</h2>
     <div class="disclosure">
-      <strong>Income disclosure.</strong> The figures on this page are a hypothetical illustration of
-      how the Amway compensation plan calculates income at a chosen level of product sales. They are
-      <strong>not</strong> a promise, guarantee, projection, or estimate of what any person will or is
-      likely to earn, and they are not representative of average results. They assume every unit shown
-      is actually sold at the stated price every month, that team members perform exactly as entered,
-      and that all volume qualifies — none of which is typical.
-      <br><br>
-      Most Amway IBOs earn modest amounts, and many earn nothing. Any conversation in which these
-      numbers are shown must be accompanied by the current
-      <strong>Amway Independent Business Owner Compensation Plan / Income Disclosure Statement</strong>,
-      which reports actual earnings across all IBOs. Presenting income figures without it is both
-      misleading and a violation of Amway's Rules of Conduct.
-      <br><br>
-      <strong>Verify before use.</strong> This tool ships with placeholder rates. Confirm every price,
-      PV, BV and bonus percentage against current official Amway sources for your market before showing
-      this to anyone.
+      <p>
+        The figures on this page are a hypothetical illustration of how the Amway
+        compensation plan calculates income at a chosen level of product sales. They are
+        <strong>not</strong> a promise, guarantee, projection, or estimate of what any person
+        will or is likely to earn, and they are not representative of average results.
+      </p>
+      <p>
+        They assume every unit shown is actually sold at the stated price every month, that
+        team members perform exactly as entered, that nobody quits, and that all volume
+        qualifies. No costs are subtracted &mdash; not product, events, travel, tools, or
+        your own time. None of these assumptions is typical.
+      </p>
+      <p>
+        <strong>Most Amway IBOs earn modest amounts, and many earn nothing.</strong> Any
+        conversation in which these numbers are shown must be accompanied by the current
+        <strong>Amway Independent Business Owner Compensation Plan / Income Disclosure
+        Statement</strong>, which reports actual earnings across all IBOs. Presenting income
+        figures without it is misleading and violates Amway's Rules of Conduct.
+      </p>
+      <p>
+        <strong>Verify before use.</strong> This tool ships with placeholder rates. Confirm
+        every price, PV, BV and bonus percentage against current official Amway sources for
+        your market before showing this to anyone.
+      </p>
     </div>
   </div>
 
@@ -271,43 +332,38 @@
 (function(){
   "use strict";
 
-  // Commonly published North American bracket structure. PLACEHOLDER — user must verify.
-  var DEFAULT_SCHEDULE = [
+  // Commonly published North American bracket structure. PLACEHOLDER — must be verified.
+  var SCHEDULE = [
     {pv:7500, pct:25}, {pv:6000, pct:23}, {pv:4000, pct:21},
     {pv:2500, pct:18}, {pv:1500, pct:15}, {pv:1000, pct:12},
     {pv:600,  pct:9},  {pv:300,  pct:6},  {pv:100,  pct:3},
     {pv:0,    pct:0}
   ];
 
-  var WEEKS_PER_MONTH = 52/12; // 4.3333
+  var WEEKS_PER_MONTH = 52/12;
 
   var $ = function(id){ return document.getElementById(id); };
-  var money = function(n){
+  var money = function(n, dp){
     if(!isFinite(n)) n = 0;
-    return n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
-  };
-  var money2 = function(n){
-    if(!isFinite(n)) n = 0;
-    return n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
+    return n.toLocaleString('en-US',{style:'currency',currency:'USD',
+      minimumFractionDigits:dp||0, maximumFractionDigits:dp||0});
   };
   var num = function(id){ var v = parseFloat($(id).value); return isFinite(v) ? v : 0; };
 
-  // ---- build editable schedule table ----
   function renderSchedule(){
     var body = $('schedBody');
-    body.innerHTML = '';
-    DEFAULT_SCHEDULE.forEach(function(row, i){
+    SCHEDULE.forEach(function(row, i){
       var tr = document.createElement('tr');
       tr.innerHTML =
-        '<td class="num"><input type="number" data-k="pv"  data-i="'+i+'" value="'+row.pv+'"  min="0" step="1"></td>'+
-        '<td class="num"><input type="number" data-k="pct" data-i="'+i+'" value="'+row.pct+'" min="0" step="0.1"></td>';
+        '<td class="num"><input type="number" data-k="pv"  data-i="'+i+'" value="'+row.pv+'"  min="0" step="1" aria-label="Group PV threshold"></td>'+
+        '<td class="num"><input type="number" data-k="pct" data-i="'+i+'" value="'+row.pct+'" min="0" step="0.1" aria-label="Bonus percent"></td>';
       body.appendChild(tr);
     });
     body.addEventListener('input', function(e){
       var t = e.target;
       if(t.tagName !== 'INPUT') return;
       var v = parseFloat(t.value);
-      DEFAULT_SCHEDULE[+t.dataset.i][t.dataset.k] = isFinite(v) ? v : 0;
+      SCHEDULE[+t.dataset.i][t.dataset.k] = isFinite(v) ? v : 0;
       compute();
     });
   }
@@ -315,9 +371,8 @@
   // Highest bracket whose threshold the group PV meets.
   function bonusPct(groupPV){
     var best = 0;
-    for(var i=0;i<DEFAULT_SCHEDULE.length;i++){
-      var r = DEFAULT_SCHEDULE[i];
-      if(groupPV >= r.pv && r.pct > best) best = r.pct;
+    for(var i=0;i<SCHEDULE.length;i++){
+      if(groupPV >= SCHEDULE[i].pv && SCHEDULE[i].pct > best) best = SCHEDULE[i].pct;
     }
     return best;
   }
@@ -332,81 +387,66 @@
         pv        = num('pv'),
         bv        = num('bv');
 
-    var marginPerUnit = retail - cost;
+    var margin = retail - cost;
 
-    // ---------- Scenario A: you alone ----------
-    var myPV     = units * pv;
-    var myBV     = units * bv;
-    var myRetail = units * marginPerUnit;
-
+    // --- Scenario A: you alone ---
+    var myPV = units*pv, myBV = units*bv, myRetail = units*margin;
     var soloPct   = bonusPct(myPV);
-    var soloBonus = myBV * soloPct/100;
+    var soloBonus = myBV*soloPct/100;
     var soloTotal = myRetail + soloBonus;
 
-    // ---------- Scenario B: you + team ----------
-    // Each downline leg carries its own volume and earns its own bracket.
-    // You are paid the DIFFERENCE between your bracket and theirs on their BV.
-    var legPV   = teamUnits * pv;
-    var legBV   = teamUnits * bv;
-    var legPct  = bonusPct(legPV);
-
-    var groupPV = myPV + team * legPV;
+    // --- Scenario B: you + team ---
+    // Each leg qualifies for its own bracket on its own volume. You qualify for a higher
+    // bracket on total group volume, and are paid the difference on their BV.
+    var legPV = teamUnits*pv, legBV = teamUnits*bv, legPct = bonusPct(legPV);
+    var groupPV = myPV + team*legPV;
     var teamPct = bonusPct(groupPV);
-
-    var ownBonus  = myBV * teamPct/100;
+    var ownBonus  = myBV*teamPct/100;
     var diffPct   = Math.max(teamPct - legPct, 0);
-    var diffBonus = team * legBV * diffPct/100;
+    var diffBonus = team*legBV*diffPct/100;
     var teamTotal = myRetail + ownBonus + diffBonus;
 
-    // ---------- render headline figures ----------
-    function fill(prefix, monthly){
-      $(prefix+'_month').textContent = money(monthly);
-      $(prefix+'_year').textContent  = money(monthly*12);
-      $(prefix+'_week').textContent  = money(monthly/WEEKS_PER_MONTH);
-      $(prefix+'_hour').textContent  = money2(monthly/WEEKS_PER_MONTH/hours);
+    function fill(p, monthly){
+      $(p+'_month').textContent = money(monthly);
+      $(p+'_year').textContent  = money(monthly*12);
+      $(p+'_week').textContent  = money(monthly/WEEKS_PER_MONTH);
+      $(p+'_hour').textContent  = money(monthly/WEEKS_PER_MONTH/hours, 2);
     }
     fill('s', soloTotal);
     fill('t', teamTotal);
 
     $('soloDesc').textContent =
-      units + ' unit' + (units===1?'':'s') + '/mo · ' +
-      myPV.toLocaleString() + ' PV · ' + soloPct + '% bonus bracket';
+      units+' unit'+(units===1?'':'s')+'/mo · '+myPV.toLocaleString()+' PV · '+soloPct+'% bracket';
     $('teamDesc').textContent =
-      team + ' × ' + teamUnits + ' units + your ' + units + ' · ' +
-      groupPV.toLocaleString() + ' group PV · ' + teamPct + '% bonus bracket';
+      team+' × '+teamUnits+' + your '+units+' · '+groupPV.toLocaleString()+' group PV · '+teamPct+'% bracket';
 
-    // ---------- render breakdown ----------
     var rows = [
-      ['Retail margin on your own sales<br><span class="hint">' + units + ' × ' +
-        money(marginPerUnit) + ' margin</span>', myRetail, myRetail],
-      ['Performance Bonus on your own volume<br><span class="hint">' +
-        money(myBV) + ' BV × your bracket</span>', soloBonus, ownBonus],
-      ['Differential on team volume<br><span class="hint">' + team + ' legs × ' +
-        money(legBV) + ' BV × (' + teamPct + '% − ' + legPct + '%)</span>', 0, diffBonus]
+      ['Retail margin on your own sales',
+       units+' × '+money(margin)+' margin', myRetail, myRetail],
+      ['Performance Bonus on your own volume',
+       money(myBV)+' BV × your bracket', soloBonus, ownBonus],
+      ['Differential on team volume',
+       team+' legs × '+money(legBV)+' BV × ('+teamPct+'% − '+legPct+'%)', 0, diffBonus]
     ];
 
-    var html = rows.map(function(r){
-      return '<tr><td>'+r[0]+'</td><td class="num">'+money(r[1])+
-             '</td><td class="num">'+money(r[2])+'</td></tr>';
-    }).join('');
-    html += '<tr class="total"><td>Total per month</td><td class="num">'+money(soloTotal)+
-            '</td><td class="num">'+money(teamTotal)+'</td></tr>';
-    $('breakdown').innerHTML = html;
+    $('breakdown').innerHTML = rows.map(function(r){
+      return '<tr><td><div class="srcname">'+r[0]+'</div><div class="srcmath">'+r[1]+'</div></td>'+
+             '<td class="num">'+money(r[2])+'</td><td class="num">'+money(r[3])+'</td></tr>';
+    }).join('') +
+      '<tr class="total"><td>Total per month</td><td class="num">'+money(soloTotal)+
+      '</td><td class="num">'+money(teamTotal)+'</td></tr>';
 
+    var mult = soloTotal > 0 ? (teamTotal/soloTotal) : 0;
     $('mathNote').innerHTML =
-      'Your team volume lifts your <em>group PV</em> to ' + groupPV.toLocaleString() +
-      ', which moves you from the ' + soloPct + '% bracket to the ' + teamPct +
-      '% bracket. Each team member keeps their own ' + legPct +
-      '%; you are paid the ' + diffPct + '% difference on their volume. ' +
-      'That bracket jump — not the extra sales alone — is what changes the number.';
+      'Team volume lifts your group PV to '+groupPV.toLocaleString()+', moving you from the '+
+      soloPct+'% bracket to the '+teamPct+'% bracket. Each team member keeps their own '+
+      legPct+'%; you are paid the '+diffPct+'% difference on their volume. That works out to '+
+      '<em>'+mult.toFixed(1)+'× the solo figure, not '+(team+1)+'×</em> — the bracket jump is '+
+      'what changes the number, not the extra sales alone.';
   }
 
-  // ---- unverified banner toggle ----
-  $('confirm').addEventListener('change', function(){
-    $('banner').classList.toggle('hidden', this.checked);
-  });
+  $('confirm').addEventListener('change', function(){ $('banner').hidden = this.checked; });
 
-  // ---- wire up ----
   ['units','team','teamUnits','hours','retail','cost','pv','bv'].forEach(function(id){
     $(id).addEventListener('input', compute);
   });

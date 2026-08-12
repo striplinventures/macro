@@ -22,6 +22,14 @@ list-building approaches produce real conversations.
 
 - _(no entries yet)_
 
+## Customer track
+
+Log which follow-up messages get replies, which referral ask produces names, and
+which customers start referring repeatedly — that last one is the signal to hand
+them to the rep track.
+
+- _(no entries yet)_
+
 ## Rep track
 
 Log which openers land, which segments convert fastest, which reps are
@@ -45,11 +53,23 @@ file — write it there instead of re-typing it here.
 - 2026-08-12 — Added the Yager Qualification Process doc (26 pp.) and the Amway
   Money & Rewards guide to the OS: connecting scripts, the full meeting sequence,
   the launch sessions, and `context/compensation_plan.md`.
-- **Open question — where does the Amway CUSTOMER track live?** The OS has two
-  departments (partners, reps), but the Yager material assumes CUSTOMER (A-List /
-  My Shop) and PARTNER. The A-List customer script is parked at the bottom of
-  `partners/skills/connecting.md` for now. Decide whether customers get their own
-  department or stay folded into the partner track.
+- 2026-08-12 — Resolved: customers got their own department. `customers/` owns
+  everything after the sale — the A-List conversation moved there, plus the
+  post-sale lifecycle sequence and referrals. Track movement is one-way:
+  customer → rep → partner.
+- **Open — customer lifecycle is designed, not built.** Four decisions block
+  automation: which platform sends it, where customer records live (VCS data is in
+  Amway's tooling, the sequence needs install date + consent flags), who answers
+  replies, and whether rep-sold customers get their rep's follow-up or a central
+  one. Listed in `customers/skills/lifecycle_automation.md`.
+- **Open — referral incentive undecided.** Any reward for referring has to clear
+  Amway's customer-incentive rules and the no-income-claims rule first. Until
+  then, referral asks are made on the water story alone, with nothing promised.
+- **Open — commercial referrals need Amway verification.** Customers will
+  naturally name coffee shops, restaurants, and bars; those are exactly the
+  excluded categories in the Owner's Manual. Offices and break rooms are the
+  compliant version. Verify with Amway before pitching any food-service or
+  hospitality location.
 - Open item — `context/about_me.md` is a stub. The personal-story details it
   lists get used in scripts; until they're filled in, story-driven copy gets
   flagged rather than invented.

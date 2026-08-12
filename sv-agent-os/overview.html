@@ -1,0 +1,488 @@
+<title>Striplin Ventures Agent OS</title>
+
+<style>
+  /* ---- Tokens: light is the base, dark redefines only the values ---- */
+  :root {
+    --magenta: #F235A0;
+    --magenta-ink: #A8156B;   /* darkened accent, legible as small text on light */
+    --ink: #070708;
+    --gray: #6B6D6A;
+    --gray-soft: #A1A3A0;
+
+    --bg: #FFFFFF;
+    --surface: #F7F4F6;       /* neutral pulled a touch toward the magenta */
+    --surface-2: #EFEAEE;
+    --line: #DCD5DA;
+    --line-strong: #B9AEB6;
+    --text: #070708;
+    --text-dim: #55565A;
+    --accent: var(--magenta-ink);
+    --accent-bold: var(--magenta);
+    --on-accent: #FFFFFF;
+    --band: #070708;          /* full-bleed dark band, same in both themes */
+    --band-text: #FFFFFF;
+    --band-dim: #A1A3A0;
+    --band-line: #2A2129;
+
+    --display: 'Anton', 'Haettenschweiler', 'Arial Narrow Bold', 'Arial Narrow', Impact, sans-serif;
+    --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+    --measure: 68ch;
+    --pad: clamp(1.25rem, 5vw, 4rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B090A;
+      --surface: #141013;
+      --surface-2: #1C161A;
+      --line: #2C242A;
+      --line-strong: #463B42;
+      --text: #F5F2F4;
+      --text-dim: #A1A3A0;
+      --accent: #F97FC1;
+      --accent-bold: #F235A0;
+      --on-accent: #0B090A;
+      --band: #000000;
+      --band-line: #2A2129;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0B090A;
+    --surface: #141013;
+    --surface-2: #1C161A;
+    --line: #2C242A;
+    --line-strong: #463B42;
+    --text: #F5F2F4;
+    --text-dim: #A1A3A0;
+    --accent: #F97FC1;
+    --accent-bold: #F235A0;
+    --on-accent: #0B090A;
+    --band: #000000;
+    --band-line: #2A2129;
+  }
+
+  /* ---- Base ---- */
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: var(--pad); }
+  .stack { display: flex; flex-direction: column; }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; text-wrap: balance; margin: 0; line-height: 0.94; letter-spacing: 0.01em; }
+  p { margin: 0; max-width: var(--measure); }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .rule { height: 4px; background: var(--accent-bold); border: 0; margin: 0; }
+
+  /* ---- Masthead ---- */
+  .masthead {
+    background: var(--band);
+    color: var(--band-text);
+    padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
+  }
+  .masthead .wrap { display: flex; flex-direction: column; gap: 1.75rem; }
+  .brandline { display: flex; align-items: center; gap: 0.9rem; }
+  .brandline svg { width: 34px; height: 34px; flex: none; }
+  .brandline .name {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.95rem;
+    color: var(--band-text);
+  }
+  .masthead h1 {
+    font-size: clamp(3.2rem, 15vw, 9.5rem);
+    letter-spacing: -0.01em;
+    color: var(--band-text);
+  }
+  .masthead h1 em { font-style: normal; color: var(--magenta); }
+  .mast-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.5rem;
+    align-items: baseline;
+    border-top: 1px solid var(--band-line);
+    padding-top: 1.25rem;
+  }
+  .mast-foot p { color: var(--band-dim); max-width: 46ch; }
+  .mast-foot .value { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--magenta); }
+
+  /* ---- Internal-use notice ---- */
+  .notice {
+    background: var(--magenta);
+    color: #FFFFFF;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .notice .wrap { padding-block: 0.7rem; }
+
+  /* ---- Sections ---- */
+  section { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: 0; }
+  .sec-head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .sec-head h2 { font-size: clamp(1.9rem, 5vw, 3rem); }
+  .sec-head p { color: var(--text-dim); }
+
+  /* ---- Objective figures ---- */
+  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .fig { background: var(--bg); padding: 1.5rem 1.35rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .fig .n { font-family: var(--display); font-size: clamp(2.6rem, 7vw, 3.9rem); line-height: 0.85; color: var(--accent-bold); font-variant-numeric: tabular-nums; }
+  .fig .l { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+
+  /* ---- Two tracks ---- */
+  .tracks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); }
+  @media (min-width: 720px) { .tracks { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .tracks { grid-template-columns: repeat(3, 1fr); } }
+  .track { background: var(--bg); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 1.1rem; }
+  .track h3 { font-size: 1.7rem; }
+  .track .path { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+  .track dl { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.1rem; margin: 0; font-size: 0.95rem; }
+  .track dt { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); padding-top: 0.22rem; }
+  .track dd { margin: 0; }
+  .bridge {
+    margin-top: 1.5rem;
+    border-left: 4px solid var(--accent-bold);
+    padding: 0.9rem 0 0.9rem 1.15rem;
+    color: var(--text-dim);
+  }
+  .bridge strong { color: var(--text); }
+
+  /* ---- Funnel rail ---- */
+  .rail-scroll { overflow-x: auto; padding-bottom: 0.75rem; }
+  .rail { display: flex; gap: 0; min-width: max-content; border-top: 2px solid var(--line-strong); }
+  .step { display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 1.4rem 0 0; min-width: 8.5rem; position: relative; }
+  .step::before { content: ""; position: absolute; top: -6px; left: 0; width: 10px; height: 10px; background: var(--line-strong); }
+  .step.key::before { background: var(--accent-bold); }
+  .step .s-n { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--text-dim); }
+  .step .s-t { font-family: var(--display); font-size: 1.15rem; text-transform: uppercase; }
+  .step.key .s-t { color: var(--accent); }
+  .step .s-d { font-size: 0.82rem; color: var(--text-dim); line-height: 1.45; max-width: 15ch; }
+
+  /* ---- Offers ---- */
+  .offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .offer { border: 1px solid var(--line); background: var(--surface); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .offer h3 { font-size: 1.35rem; }
+  .offer .who { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); }
+  .offer ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.93rem; }
+  .offer .metric { font-family: var(--mono); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 0.8rem; margin-top: auto; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+
+  /* ---- Cadence + standards ---- */
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 820px) { .two-col { grid-template-columns: 1fr 1fr; gap: 3.5rem; } }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  caption { text-align: left; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding-bottom: 0.85rem; }
+  th, td { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); font-weight: 400; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---- File map ---- */
+  .filemap { background: var(--band); color: var(--band-text); border: 0; padding: clamp(1.25rem, 3vw, 2rem); overflow-x: auto; font-family: var(--mono); font-size: 0.83rem; line-height: 1.9; margin: 0; }
+  .filemap .f { color: var(--magenta); }
+  .filemap .c { color: var(--band-dim); }
+
+  /* ---- Rules ---- */
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .rule-card { background: var(--bg); padding: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .rule-card h3 { font-size: 1.1rem; }
+  .rule-card p { font-size: 0.9rem; color: var(--text-dim); }
+
+  /* ---- Open items ---- */
+  .open { border: 2px solid var(--accent-bold); padding: clamp(1.25rem, 3vw, 2rem); display: flex; flex-direction: column; gap: 1rem; }
+  .open ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .open li::marker { font-family: var(--mono); color: var(--accent); }
+
+  /* ---- Footer ---- */
+  footer { background: var(--band); color: var(--band-dim); padding-block: 2.5rem 3rem; font-size: 0.8rem; }
+  footer .wrap { display: flex; flex-direction: column; gap: 1rem; }
+  footer p { max-width: 80ch; }
+  footer a { color: var(--magenta); }
+  footer .disclosure { font-family: var(--mono); font-size: 0.72rem; line-height: 1.7; }
+
+  a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent-bold); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">
+      <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <path d="M13 9.5 L20 5 L27 9.5 L24.5 12 L20 9.2 L15.5 12 Z" fill="#F235A0"/>
+        <path d="M20 15 L33 34 L27.5 34 L20 23 L12.5 34 L7 34 Z" fill="#F235A0"/>
+      </svg>
+      <span class="name">Striplin Ventures</span>
+    </div>
+    <h1>Agent <em>OS</em></h1>
+    <div class="mast-foot">
+      <p>The context, skills, and process files that brief the agent before any task — three departments, one company.</p>
+      <span class="value">Everyone Must Elevate</span>
+    </div>
+  </div>
+</header>
+
+<div class="notice">
+  <div class="wrap">Internal reference · Contains IBO-only figures · Not for use with prospects</div>
+</div>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">The 60-day objective</p>
+      <h2>Two launches, six actives</h2>
+      <p>These are two different offers to two different people. The whole OS exists to keep them from collapsing into one pitch.</p>
+    </div>
+    <div class="figures">
+      <div class="fig"><span class="n">2</span><span class="l">Business partners launched</span></div>
+      <div class="fig"><span class="n">6</span><span class="l">eSpring reps active</span></div>
+      <div class="fig"><span class="n">3</span><span class="l">Legs sponsored → Bronze</span></div>
+      <div class="fig"><span class="n">90</span><span class="l">Day core run, 90%+ consistency</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">The departments</p>
+      <h2>Customers / Reps / Partners</h2>
+      <p>Same company, three different shapes. One owns the relationship after the sale, one is speed to a first sale, one is a selection process that duplicates itself.</p>
+    </div>
+    <div class="tracks">
+      <article class="track">
+        <span class="path">/customers/</span>
+        <h3>Retail eSpring owners</h3>
+        <dl>
+          <dt>Who</dt><dd>People who bought the product — directly or through a rep.</dd>
+          <dt>Gate</dt><dd>None. They already bought.</dd>
+          <dt>Owns</dt><dd>Experience follow-up, social, and referrals — everything after the sale.</dd>
+          <dt>Shape</dt><dd>Long relationship, low touch, compounding through referrals.</dd>
+          <dt>Posture</dt><dd>We check on their water, not on an appliance.</dd>
+        </dl>
+      </article>
+      <article class="track">
+        <span class="path">/reps/</span>
+        <h3>eSpring product sales</h3>
+        <dl>
+          <dt>Who</dt><dd>Plumbers, home builders, and ADT reps already standing in homeowners' houses.</dd>
+          <dt>Gate</dt><dd>None. No qualification pattern, no weekly conversation quota.</dd>
+          <dt>Screen</dt><dd>Weekly access to homes · willing to run the demo · reports back in 48 hours</dd>
+          <dt>Shape</dt><dd>Higher volume, faster start.</dd>
+          <dt>Posture</dt><dd>Education first — lead with the water, not the product.</dd>
+        </dl>
+      </article>
+      <article class="track">
+        <span class="path">/partners/</span>
+        <h3>Business partnership</h3>
+        <dl>
+          <dt>Who</dt><dd>Entrepreneurial candidates who want the whole model, not a product income stream.</dd>
+          <dt>Gate</dt><dd>The full Yager qualification pattern, start to finish.</dd>
+          <dt>Screen</dt><dd>Reliability · Trustworthiness · Willingness to learn · Persistence · Hunger</dd>
+          <dt>Shape</dt><dd>Low volume, high retention, duplicates itself.</dd>
+          <dt>Posture</dt><dd>We are the selectors, not the sellers.</dd>
+        </dl>
+      </article>
+    </div>
+    <div class="bridge">
+      <strong>Movement runs one way — <span style="font-family: var(--mono); color: var(--accent);">customer → rep → partner</span></strong> — and only on the person's own signal. A customer who keeps referring is a rep candidate; a rep who asks how to build their own thing is a partner candidate. Nothing moves the other direction, nobody hears two pitches in one conversation, and a service follow-up never carries a business pitch.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">Partner track · the pattern is the filter</p>
+      <h2>Conversation to launch</h2>
+      <p>Each step is a read on the five qualities. Skipping one to move faster destroys the signal it was there to collect.</p>
+    </div>
+    <div class="rail-scroll">
+      <div class="rail">
+        <div class="step"><span class="s-n">01</span><span class="s-t">Conversation</span><span class="s-d">FORM: family, occupation, recreation, mentorship</span></div>
+        <div class="step"><span class="s-n">02</span><span class="s-t">MA</span><span class="s-d">20–30 seconds. Find out if they're looking</span></div>
+        <div class="step"><span class="s-n">03</span><span class="s-t">DTM</span><span class="s-d">Open the door only if you found their why</span></div>
+        <div class="step"><span class="s-n">04</span><span class="s-t">Call back</span><span class="s-d">Set the coffee meeting</span></div>
+        <div class="step key"><span class="s-n">05</span><span class="s-t">MG1</span><span class="s-d">Your story, their #10, the 8 questions</span></div>
+        <div class="step key"><span class="s-n">06</span><span class="s-t">MG2</span><span class="s-d">Book review. Don't proceed unfinished</span></div>
+        <div class="step"><span class="s-n">07</span><span class="s-t">OV1</span><span class="s-d">The overview. Your store vs. the store</span></div>
+        <div class="step"><span class="s-n">08</span><span class="s-t">FT1</span><span class="s-d">Dreams costed. Are they serious?</span></div>
+        <div class="step"><span class="s-n">09</span><span class="s-t">OV2</span><span class="s-d">The plan again — once is never enough</span></div>
+        <div class="step key"><span class="s-n">10</span><span class="s-t">FT2</span><span class="s-d">Time and money on the table. 24-hour call back</span></div>
+        <div class="step"><span class="s-n">11</span><span class="s-t">Pre-offer</span><span class="s-d">Questions reviewed, then the offer</span></div>
+        <div class="step key"><span class="s-n">12</span><span class="s-t">Launch</span><span class="s-d">Six sessions, 90 minutes, over 14 days</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">The offers</p>
+      <h2>Three, never blended</h2>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <span class="who">Homeowner</span>
+        <h3>eSpring</h3>
+        <ul>
+          <li>PFAS-affected and bad-water markets</li>
+          <li>New builds, realtor and builder referrals</li>
+          <li>Residential and light commercial only</li>
+        </ul>
+        <p class="metric">$1,299 retail · ~$44/mo financing</p>
+      </article>
+      <article class="offer">
+        <span class="who">Trades &amp; in-home sales</span>
+        <h3>Rep track</h3>
+        <ul>
+          <li>Sell inside conversations they already have</li>
+          <li>No change to their primary job</li>
+          <li>Demo stack and script provided day one</li>
+        </ul>
+        <p class="metric">~$282/unit profit + bonus at scale</p>
+      </article>
+      <article class="offer">
+        <span class="who">Selected candidates</span>
+        <h3>Partner track</h3>
+        <ul>
+          <li>Mentorship, coaching, and the support system</li>
+          <li>Launch sequence and team incentive structure</li>
+          <li>Mentorship is not required to register with Amway</li>
+        </ul>
+        <p class="metric">12–14 hrs/week · 5 years · ~$225 stack</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="two-col">
+      <div class="stack" style="gap: 1.5rem;">
+        <table>
+          <caption>Weekly cadence target</caption>
+          <thead>
+            <tr><th scope="col">Activity</th><th scope="col">Per week</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Conversations</td><td class="num">25–30</td></tr>
+            <tr><td>Make Them Aware</td><td class="num">8–12</td></tr>
+            <tr><td>Drop The Message</td><td class="num">3–5</td></tr>
+            <tr><td>Meet &amp; Greet</td><td class="num">1–3</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.88rem; color: var(--text-dim);">Tracked on the Core Run. Missing two or more days restarts the run.</p>
+      </div>
+      <div class="stack" style="gap: 1.5rem;">
+        <table>
+          <caption>Team standards</caption>
+          <thead>
+            <tr><th scope="col">Rhythm</th><th scope="col">Commitment</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">Daily</td><td>Audio, 15–30 min reading, accountability app</td></tr>
+            <tr><td class="num">Weekly</td><td>Owners' meeting, two mentor huddles</td></tr>
+            <tr><td class="num">Monthly</td><td>150 PV at 60% VCS, DITTO, seminar</td></tr>
+            <tr><td class="num">Quarterly</td><td>2–3 day major training event</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.88rem; color: var(--text-dim);">$300 in customer sales — $100 × 3 within six months — is required before sponsoring anyone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">The operating system</p>
+      <h2>What loads, and when</h2>
+      <p>Only the master file loads automatically. It tells the agent what exists and which files to pull for the task at hand.</p>
+    </div>
+    <pre class="filemap"><span class="f">sv-agent-os/</span>
+├── <span class="f">claude.md</span>              <span class="c">the only file that auto-loads</span>
+├── <span class="f">memory.md</span>              <span class="c">what's working in the field, logged after</span>
+├── <span class="f">context/</span>
+│   ├── about_me.md          <span class="c">personal story — still a stub</span>
+│   ├── business_info.md     <span class="c">position, standards, compliance</span>
+│   ├── brand_voice.md       <span class="c">palette, type, tone</span>
+│   ├── offer_catalog.md     <span class="c">three offers and how they connect</span>
+│   └── compensation_plan.md <span class="c">comp plan — IBO use only</span>
+├── <span class="f">customers/</span>
+│   ├── context/icp.md
+│   └── skills/              <span class="c">conversations · lifecycle · referrals</span>
+├── <span class="f">reps/</span>
+│   ├── context/icp.md
+│   └── skills/sales_script.md   <span class="c">NEPQ + PFAS opener</span>
+└── <span class="f">partners/</span>
+    ├── context/icp.md
+    └── skills/              <span class="c">connecting · qualification · launch</span></pre>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">Standing rules</p>
+      <h2>How the agent behaves</h2>
+    </div>
+    <div class="rules">
+      <div class="rule-card">
+        <h3>Assumptions are the enemy</h3>
+        <p>If a script, number, name, or contact isn't in the files, ask. Never invent one — hardest on PV figures and water-quality claims.</p>
+      </div>
+      <div class="rule-card">
+        <h3>Compliance outranks copy</h3>
+        <p>Never lead with Amway. No income claims without full disclosure. Education before product. Engage, don't broadcast.</p>
+      </div>
+      <div class="rule-card">
+        <h3>Never blend the offers</h3>
+        <p>Not in one piece of copy, one conversation plan, or one follow-up sequence.</p>
+      </div>
+      <div class="rule-card">
+        <h3>Define done first</h3>
+        <p>Restate the finish line before starting. A vague goal produces a vague stopping point.</p>
+      </div>
+      <div class="rule-card">
+        <h3>One session per goal</h3>
+        <p>Start fresh for each new objective. The master file re-briefs every time, so nothing is lost by starting over.</p>
+      </div>
+      <div class="rule-card">
+        <h3>Scripts are memorized, not paraphrased</h3>
+        <p>The Yager wording is the wording. Rewriting it into something that sounds better breaks the filter.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="kicker">Logged in memory</p>
+      <h2>Still open</h2>
+    </div>
+    <div class="open">
+      <ol>
+        <li><strong>The customer lifecycle is designed, not built.</strong> Four decisions block automation: which platform sends it, where customer records live, who answers replies, and whether rep-sold customers get their rep's follow-up or a central one.</li>
+        <li><strong>Commercial referrals need Amway verification.</strong> Customers will name coffee shops, restaurants, and bars — exactly the categories the Owner's Manual excludes. Offices and break rooms are the compliant version.</li>
+        <li><strong>Referral incentive undecided.</strong> Any reward has to clear Amway's customer-incentive rules and the no-income-claims rule. Until then, asks are made on the water story alone, with nothing promised.</li>
+        <li><strong>about_me.md is a stub.</strong> Six story questions are waiting on answers. Until they're filled in, story-driven copy gets flagged rather than invented.</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color: #FFFFFF;">Make Money · Make Friends · Make a Difference</strong></p>
+    <p class="disclosure">For the calendar year 2024, the average income from Amway for all U.S. registered IBOs at the Founders Platinum level and below was $723 before expenses. See <a href="https://www.amway.com/income-disclosure">amway.com/income-disclosure</a> for details and the most up-to-date information. Earnings depend on many factors, including customer base, business experience, effort, dedication, and the quality and performance of the downline sales team.</p>
+    <p class="disclosure">Striplin Ventures is an independent business. Per-unit and comp plan figures on this page are internal reference for IBO use and are not for use with prospects.</p>
+  </div>
+</footer>

@@ -28,18 +28,25 @@ you write anything.
 The full 60-day plan doc lives outside this OS — ask me to re-share it when a
 task depends on its details.
 
-## Two departments, one company
+## Three departments, one company
 
-| | `partners/` | `reps/` |
-|---|---|---|
-| Offer | Long-term business partnership | eSpring product sales |
-| Gate | Full 8-step Yager qualification | None — speed to first sale |
-| Who | Entrepreneurial, wants the whole model | Plumbers, builders, ADT reps already in homes |
-| Volume | Low volume, high retention, duplicates | Higher volume, faster start |
+| | `partners/` | `reps/` | `customers/` |
+|---|---|---|---|
+| Offer | Long-term business partnership | eSpring product sales | The product itself |
+| Gate | Full Yager qualification | None — speed to first sale | None — they bought |
+| Who | Entrepreneurial, wants the whole model | Plumbers, builders, ADT reps already in homes | Retail eSpring owners |
+| Owns | Selection and launch | Getting reps to a first sale | Everything after the sale |
 
-The tracks connect in one direction: a rep who is performing and starts asking
-how to build their own thing is a partner candidate. That's the bridge — not a
-hard wall, and not an excuse to blend the two pitches.
+Movement between tracks runs **one way**, and only on the person's own signal:
+
+```
+customer → rep → partner
+```
+
+A customer who keeps referring people is a rep candidate. A rep who's producing
+and asks how to build their own thing is a partner candidate. Nothing moves the
+other direction, nobody hears two pitches in one conversation, and a service
+follow-up never carries a business pitch.
 
 ## Load order — do this before starting any task
 
@@ -51,6 +58,7 @@ hard wall, and not an excuse to blend the two pitches.
 3. The department for this task:
    - Partner work → `partners/context/icp.md` + `partners/skills/`
    - Rep work → `reps/context/icp.md` + `reps/skills/`
+   - Customer work → `customers/context/icp.md` + `customers/skills/`
 4. `memory.md` — what's actually working in the field right now.
 
 ## Skills index
@@ -66,6 +74,12 @@ Skills are SOPs. Load the one that matches the task and follow it as written.
   B–D.
 - `reps/skills/sales_script.md` — NEPQ-based eSpring script, PFAS opener,
   segment-by-segment pitch, rep onboarding checklist.
+- `customers/skills/customer_conversations.md` — the A-List / My Shop
+  conversation.
+- `customers/skills/lifecycle_automation.md` — post-sale texts, email, and social,
+  with the consent rules. Designed, not built yet.
+- `customers/skills/referrals.md` — when and how to ask, and the verification gate
+  on commercial referrals.
 
 The Yager scripts are memorized material, not templates. Use the wording as
 written; don't paraphrase a script into something that sounds better.

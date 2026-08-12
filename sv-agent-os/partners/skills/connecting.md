@@ -186,29 +186,12 @@ door, you can return to it:
 
 ---
 
-## A-List customer conversations (Amway CUSTOMER track)
+## A-List customer conversations
 
-> **Track note:** this belongs to the Amway CUSTOMER track (A-List, My Shop), not
-> the partner track and not the eSpring rep track. It lives here because it comes
-> from the same chapter of the source document and runs off the same Names List.
-> If a customer department gets added to this OS, move this section there.
-
-Start with A-List connections — close friends and family who are **not**
-potential mentorship candidates — to establish customer sales. These are the
-people who'd drive across town to shop with you if you opened a store.
-
-> "Hello ______. I am super excited that… / I wanted to share with you that… I've
-> just launched my own online store. We have a number of best-in-class, exclusive
-> brands in the areas of Sports Nutrition, Energy, Supplementation, clean Skin
-> Care, Beauty and Personal Care, as well as environmentally conscious Home
-> Care."
->
-> "Would you consider giving me the opportunity of earning your business?"
-
-Then set a face-to-face or video appointment, tour the My Shop site together,
-register them as a customer, and place an order with them. Once the customer
-relationship exists, the Wellness and Product Surveys expand the level of service
-you offer.
+The Names List splits into **P** and **C**, and the **C** side is a different
+department's work: the A-List / My Shop customer conversation now lives in
+`../../customers/skills/customer_conversations.md`. Segment the list here, run the
+customer conversation there.
 
 ## Logging
 

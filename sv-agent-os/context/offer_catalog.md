@@ -22,6 +22,9 @@ before any B2B/commercial push.
 
 **Sold through:** direct sale, or through a rep (Offer 2).
 
+**After the sale:** the customer belongs to `../customers/` — experience
+follow-up, social, and referrals.
+
 ## Offer 2 — Rep track (sell eSpring inside your existing job)
 
 **Who it's for:** people already standing in homeowners' houses as part of their
@@ -80,10 +83,11 @@ who buy.
 
 - Offer 1 sells to a homeowner. Offer 2 recruits the person who reaches that
   homeowner. Offer 3 builds the person who builds the team.
-- The only upgrade path is **Offer 2 → Offer 3**: a rep who is consistently
-  selling and starts asking how to build their own thing gets handed to the
-  partner track. Nothing moves the other direction, and no candidate hears both
-  pitches in the same conversation.
+- Upgrades run one way, on the person's own signal: **customer → rep → partner**.
+  A customer who keeps referring is a rep candidate; a rep who asks how to build
+  their own thing is a partner candidate. Nothing moves the other direction, no
+  one hears two pitches in the same conversation, and a customer service
+  follow-up never carries a business pitch.
 - Compliance note for all three: no income claims without full disclosure. The
   ~$282/unit figure is a per-unit economics fact for people being onboarded, not
   an earnings promise for marketing copy.

@@ -57,14 +57,27 @@ file — write it there instead of re-typing it here.
   everything after the sale — the A-List conversation moved there, plus the
   post-sale lifecycle sequence and referrals. Track movement is one-way:
   customer → rep → partner.
-- **Open — customer lifecycle is designed, not built.** Four decisions block
-  automation: which platform sends it, where customer records live (VCS data is in
-  Amway's tooling, the sequence needs install date + consent flags), who answers
-  replies, and whether rep-sold customers get their rep's follow-up or a central
-  one. Listed in `customers/skills/lifecycle_automation.md`.
-- **Open — referral incentive undecided.** Any reward for referring has to clear
-  Amway's customer-incentive rules and the no-income-claims rule first. Until
-  then, referral asks are made on the water story alone, with nothing promised.
+- 2026-08-12 — The site is a Lovable project and **a referral pipeline is already
+  built** — Supabase, stages new→contacted→demoed→tested→closed_won/lost, bonus
+  status, email notifications, partner and admin portals, and MCP tools. Captured
+  in `context/web_platform.md`. Check there before proposing to build anything.
+- 2026-08-12 — `context/brand_voice.md` rewritten from the site's actual tokens.
+  Corrections worth remembering: text on magenta is **black**, muted grey is
+  `#8A8A90` not `#A1A3A0`, and the brand is dark-only — there is no light theme.
+- **Open — customer lifecycle still needs three things** before it can run: a
+  customer record with install date, an SMS channel (email exists, texting
+  doesn't), and consent capture per channel. Full list in
+  `customers/skills/lifecycle_automation.md`.
+- **Open — referral bonus terms undocumented.** The software has
+  pending/earned/paid and notifies on earned, but no amount or terms are written
+  down, and Amway's customer-incentive rules plus the no-income-claims rule have
+  to be settled before quoting anything.
+- **Open — "partner" means two different things.** The site calls any referrer a
+  partner; this OS means a qualified Yager business partner. Renaming one would
+  end a permanent source of confusion.
+- **Worth a look — AquaRoute CRM** (StriplinHub workspace) is a RepCard-style D2D
+  CRM with map dispositioning and appointment tracking. That's the rep track's
+  tooling, already drafted.
 - **Open — commercial referrals need Amway verification.** Customers will
   naturally name coffee shops, restaurants, and bars; those are exactly the
   excluded categories in the Owner's Manual. Offices and break rooms are the

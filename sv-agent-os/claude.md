@@ -16,6 +16,8 @@ company. Amway IBO in the Yager Group / InterNET Services system since
 - Every offer and its economics: `context/offer_catalog.md`
 - Amway comp plan reference: `context/compensation_plan.md` — internal only, the
   source guide is marked "For IBO use only. Not for use with prospects."
+- The site and the software already running: `context/web_platform.md`. Read it
+  before proposing to build anything — the referral pipeline already exists.
 
 ## The 60-day objective (current sprint)
 

@@ -75,14 +75,36 @@ The commercial ask itself:
 Phrased around places they spend time rather than businesses they like, it lands
 on offices naturally instead of collecting a list of restaurants we can't serve.
 
+## Where referrals go — this is already built
+
+The site runs a live referral pipeline (`../../context/web_platform.md`). Submit
+referrals there rather than tracking them privately.
+
+**Record:** referrer, client name, phone, email, city, notes.
+
+**Stages:** `new → contacted → demoed → tested → closed_won` / `closed_lost`
+
+Demo and dip test are separate stages, which is the right shape — a referral that
+reached "demoed" but never "tested" means the dip test didn't happen, and that's
+the step that closes.
+
+**Notifications already fire** when a referral is submitted and when a bonus is
+marked earned. Only an admin can move a stage or change bonus status.
+
 ## What the referrer gets
 
-**Open decision — not set.** Before any referral incentive is offered, it has to
-clear two things: Amway's rules on customer incentives, and the no-income-claims
-rule. Until that's resolved, the ask is made on the strength of the water story
-alone, with no reward promised.
+The software has a bonus concept — `pending → earned → paid`, with an
+earned-bonus notification to the referrer. **What the bonus actually is isn't
+documented anywhere in this OS**, and two questions have to be settled before any
+amount is quoted to anyone:
 
-Do not invent an incentive to make an ask land better.
+1. Amway's rules on customer incentives — what may be offered, to whom.
+2. The no-income-claims rule — how it can be described without becoming an
+   earnings claim.
+
+Until both are answered in writing here, make the ask on the strength of the
+water story alone and don't promise a number. Do not invent an incentive to make
+an ask land better.
 
 ## Handling an inbound referral
 

@@ -84,15 +84,30 @@ about money.
 
 ## Before this gets automated
 
-Open decisions, none of them made yet:
+Some of this already exists — see `../../context/web_platform.md` before building
+anything.
 
-1. **What tool sends it.** No platform picked. Whatever it is has to hold consent
-   state per channel and honor opt-outs across both.
-2. **Where customer records live.** Right now the VCS data lives in Amway's
-   tooling. The sequence needs a record with install date and consent flags — the
-   two systems need one source of truth, not two.
-3. **Who answers replies.** Every message in this sequence invites a reply. An
-   automation that sends but doesn't listen is worse than sending nothing.
-4. **Rep-sold customers.** Does the rep run their own follow-up, or does this
+**Already there:** Supabase behind the site, server-side email sending, and a
+referral pipeline with stage and bonus notifications.
+
+**Still missing, in build order:**
+
+1. **A customer record.** The `referrals` table is a pipeline of prospects, not a
+   list of eSpring owners. Nothing today stores install date or the consent
+   flags, and the sequence is timed off install date. This is the first thing to
+   build.
+2. **An SMS channel.** Email sending exists; texting does not. Most of the
+   sequence above is texts, so this is the gap between the spec and a working
+   automation.
+3. **Consent capture.** No consent field exists anywhere yet. It has to be
+   recorded per channel, at the point of sale, before a single automated message
+   goes out.
+4. **Who answers replies.** Every message here invites a reply. An automation
+   that sends but doesn't listen is worse than sending nothing.
+5. **Rep-sold customers.** Does the rep run their own follow-up, or does this
    sequence run centrally with the rep's name on it? Decide before scaling past
    the first few reps.
+
+One decision spans all of these: VCS data lives in Amway's tooling and the
+sequence needs its own record. Those two need one source of truth, not two
+drifting lists.

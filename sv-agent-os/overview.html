@@ -1,267 +1,227 @@
 <title>Striplin Ventures Agent OS</title>
 
 <style>
-  /* ---- Tokens: light is the base, dark redefines only the values ---- */
+  /* Single-theme by design: the SV brand system is dark-only — there is no
+     light theme on striplinventures.lovable.app, so there isn't one here.
+     Every color is painted explicitly so the page holds on any host ground. */
   :root {
-    --magenta: #F235A0;
-    --magenta-ink: #A8156B;   /* darkened accent, legible as small text on light */
-    --ink: #070708;
-    --gray: #6B6D6A;
-    --gray-soft: #A1A3A0;
+    --bg: #070708;
+    --fg: #F4F4F6;
+    --card: #0E0E10;
+    --secondary: #131316;
+    --primary: #F235A0;
+    --on-primary: #000000;
+    --primary-hover: #FF4EB1;
+    --muted-fg: #8A8A90;
+    --border: rgba(244, 244, 246, 0.10);
+    --hairline: rgba(244, 244, 246, 0.14);
 
-    --bg: #FFFFFF;
-    --surface: #F7F4F6;       /* neutral pulled a touch toward the magenta */
-    --surface-2: #EFEAEE;
-    --line: #DCD5DA;
-    --line-strong: #B9AEB6;
-    --text: #070708;
-    --text-dim: #55565A;
-    --accent: var(--magenta-ink);
-    --accent-bold: var(--magenta);
-    --on-accent: #FFFFFF;
-    --band: #070708;          /* full-bleed dark band, same in both themes */
-    --band-text: #FFFFFF;
-    --band-dim: #A1A3A0;
-    --band-line: #2A2129;
+    --display: "Anton", "Helvetica Neue", Impact, sans-serif;
+    --body: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, "Liberation Mono", monospace;
 
-    --display: 'Anton', 'Haettenschweiler', 'Arial Narrow Bold', 'Arial Narrow', Impact, sans-serif;
-    --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
-
+    --radius: 2px;
     --measure: 68ch;
-    --pad: clamp(1.25rem, 5vw, 4rem);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0B090A;
-      --surface: #141013;
-      --surface-2: #1C161A;
-      --line: #2C242A;
-      --line-strong: #463B42;
-      --text: #F5F2F4;
-      --text-dim: #A1A3A0;
-      --accent: #F97FC1;
-      --accent-bold: #F235A0;
-      --on-accent: #0B090A;
-      --band: #000000;
-      --band-line: #2A2129;
-    }
-  }
-
-  :root[data-theme="dark"] {
-    --bg: #0B090A;
-    --surface: #141013;
-    --surface-2: #1C161A;
-    --line: #2C242A;
-    --line-strong: #463B42;
-    --text: #F5F2F4;
-    --text-dim: #A1A3A0;
-    --accent: #F97FC1;
-    --accent-bold: #F235A0;
-    --on-accent: #0B090A;
-    --band: #000000;
-    --band-line: #2A2129;
-  }
-
-  /* ---- Base ---- */
   body {
     margin: 0;
     background: var(--bg);
-    color: var(--text);
+    color: var(--fg);
     font-family: var(--body);
     font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
   }
+  ::selection { background: var(--primary); color: #000; }
+  img, svg { max-width: 100%; }
 
-  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: var(--pad); }
-  .stack { display: flex; flex-direction: column; }
+  .swiss { max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 
-  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; text-wrap: balance; margin: 0; line-height: 0.94; letter-spacing: 0.01em; }
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 0.92;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--fg);
+  }
   p { margin: 0; max-width: var(--measure); }
 
-  .kicker {
+  .eyebrow {
     font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--muted-fg);
     margin: 0;
   }
-
-  .rule { height: 4px; background: var(--accent-bold); border: 0; margin: 0; }
+  .eyebrow .num { color: var(--primary); }
+  .label {
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+  }
 
   /* ---- Masthead ---- */
-  .masthead {
-    background: var(--band);
-    color: var(--band-text);
-    padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
-  }
-  .masthead .wrap { display: flex; flex-direction: column; gap: 1.75rem; }
-  .brandline { display: flex; align-items: center; gap: 0.9rem; }
+  .masthead { padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2rem, 5vw, 3.5rem); }
+  .masthead .swiss { display: flex; flex-direction: column; gap: 2rem; }
+  .brandline { display: flex; align-items: center; gap: 12px; }
   .brandline svg { width: 34px; height: 34px; flex: none; }
-  .brandline .name {
+  .wordmark {
     font-family: var(--display);
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.95rem;
-    color: var(--band-text);
+    letter-spacing: 0.02em;
+    font-size: 1.5rem;
+    line-height: 1;
   }
-  .masthead h1 {
-    font-size: clamp(3.2rem, 15vw, 9.5rem);
-    letter-spacing: -0.01em;
-    color: var(--band-text);
-  }
-  .masthead h1 em { font-style: normal; color: var(--magenta); }
+  .wordmark .v { color: var(--primary); }
+  .masthead h1 { font-size: clamp(3rem, 14vw, 9rem); letter-spacing: 0.02em; }
+  .masthead h1 .os { color: var(--primary); }
   .mast-foot {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 2.5rem;
+    gap: 0.75rem 3rem;
     align-items: baseline;
-    border-top: 1px solid var(--band-line);
-    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.5rem;
   }
-  .mast-foot p { color: var(--band-dim); max-width: 46ch; }
-  .mast-foot .value { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--magenta); }
+  .mast-foot p { color: var(--muted-fg); max-width: 48ch; }
 
-  /* ---- Internal-use notice ---- */
-  .notice {
-    background: var(--magenta);
-    color: #FFFFFF;
-    font-family: var(--mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .notice .wrap { padding-block: 0.7rem; }
+  /* ---- Internal notice ---- */
+  .notice { background: var(--primary); color: var(--on-primary); }
+  .notice .swiss { padding-block: 0.75rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
 
   /* ---- Sections ---- */
-  section { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--line); }
-  section:first-of-type { border-top: 0; }
-  .sec-head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  section { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--hairline); }
+  .sec-head { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 2.75rem; }
   .sec-head h2 { font-size: clamp(1.9rem, 5vw, 3rem); }
-  .sec-head p { color: var(--text-dim); }
+  .sec-head p { color: var(--muted-fg); }
 
-  /* ---- Objective figures ---- */
-  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .fig { background: var(--bg); padding: 1.5rem 1.35rem; display: flex; flex-direction: column; gap: 0.4rem; }
-  .fig .n { font-family: var(--display); font-size: clamp(2.6rem, 7vw, 3.9rem); line-height: 0.85; color: var(--accent-bold); font-variant-numeric: tabular-nums; }
-  .fig .l { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+  /* ---- Figures ---- */
+  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .fig { background: var(--bg); padding: 1.6rem 1.35rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .fig .n { font-family: var(--display); font-size: clamp(2.6rem, 7vw, 3.9rem); line-height: 0.85; color: var(--primary); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
 
-  /* ---- Two tracks ---- */
-  .tracks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); }
+  /* ---- Tracks ---- */
+  .tracks { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
   @media (min-width: 720px) { .tracks { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1000px) { .tracks { grid-template-columns: repeat(3, 1fr); } }
-  .track { background: var(--bg); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 1.1rem; }
-  .track h3 { font-size: 1.7rem; }
-  .track .path { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
-  .track dl { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.1rem; margin: 0; font-size: 0.95rem; }
-  .track dt { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); padding-top: 0.22rem; }
+  @media (min-width: 1020px) { .tracks { grid-template-columns: repeat(3, 1fr); } }
+  .track { background: var(--card); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 1.15rem; }
+  .track h3 { font-size: 1.6rem; }
+  .track .path { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--primary); text-transform: uppercase; }
+  .track dl { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem 1.15rem; margin: 0; font-size: 0.94rem; }
+  .track dt { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-fg); padding-top: 0.3rem; }
   .track dd { margin: 0; }
-  .bridge {
-    margin-top: 1.5rem;
-    border-left: 4px solid var(--accent-bold);
-    padding: 0.9rem 0 0.9rem 1.15rem;
-    color: var(--text-dim);
-  }
-  .bridge strong { color: var(--text); }
+  .bridge { margin-top: 1.75rem; border-left: 2px solid var(--primary); padding: 0.85rem 0 0.85rem 1.25rem; color: var(--muted-fg); }
+  .bridge strong { color: var(--fg); }
+  .chain { font-family: var(--mono); color: var(--primary); white-space: nowrap; }
 
-  /* ---- Funnel rail ---- */
+  /* ---- Funnel ---- */
   .rail-scroll { overflow-x: auto; padding-bottom: 0.75rem; }
-  .rail { display: flex; gap: 0; min-width: max-content; border-top: 2px solid var(--line-strong); }
-  .step { display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 1.4rem 0 0; min-width: 8.5rem; position: relative; }
-  .step::before { content: ""; position: absolute; top: -6px; left: 0; width: 10px; height: 10px; background: var(--line-strong); }
-  .step.key::before { background: var(--accent-bold); }
-  .step .s-n { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--text-dim); }
-  .step .s-t { font-family: var(--display); font-size: 1.15rem; text-transform: uppercase; }
-  .step.key .s-t { color: var(--accent); }
-  .step .s-d { font-size: 0.82rem; color: var(--text-dim); line-height: 1.45; max-width: 15ch; }
+  .rail { display: flex; min-width: max-content; border-top: 1px solid var(--hairline); }
+  .step { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.1rem 1.5rem 0 0; min-width: 8.75rem; position: relative; }
+  .step::before { content: ""; position: absolute; top: -4px; left: 0; width: 8px; height: 8px; background: var(--muted-fg); }
+  .step.key::before { background: var(--primary); }
+  .step .s-n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--muted-fg); }
+  .step.key .s-n { color: var(--primary); }
+  .step .s-t { font-family: var(--display); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .step .s-d { font-size: 0.8rem; color: var(--muted-fg); line-height: 1.45; max-width: 16ch; }
 
   /* ---- Offers ---- */
-  .offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-  .offer { border: 1px solid var(--line); background: var(--surface); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; }
-  .offer h3 { font-size: 1.35rem; }
-  .offer .who { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); }
-  .offer ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.93rem; }
-  .offer .metric { font-family: var(--mono); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 0.8rem; margin-top: auto; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .offer { background: var(--card); padding: 1.6rem; display: flex; flex-direction: column; gap: 0.9rem; }
+  .offer h3 { font-size: 1.3rem; }
+  .offer .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); }
+  .offer ul { margin: 0; padding-left: 1.05rem; display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.92rem; color: var(--fg); }
+  .offer .metric { font-family: var(--mono); font-size: 0.8rem; border-top: 1px solid var(--hairline); padding-top: 0.85rem; margin-top: auto; color: var(--muted-fg); font-variant-numeric: tabular-nums; }
 
-  /* ---- Cadence + standards ---- */
-  .two-col { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  /* ---- Tables ---- */
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 2.75rem; }
   @media (min-width: 820px) { .two-col { grid-template-columns: 1fr 1fr; gap: 3.5rem; } }
-  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
-  caption { text-align: left; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding-bottom: 0.85rem; }
-  th, td { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); }
-  th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); font-weight: 400; }
-  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  caption { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--primary); padding-bottom: 1rem; }
+  th, td { text-align: left; padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--border); }
+  th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-fg); font-weight: 400; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--muted-fg); }
 
   /* ---- File map ---- */
-  .filemap { background: var(--band); color: var(--band-text); border: 0; padding: clamp(1.25rem, 3vw, 2rem); overflow-x: auto; font-family: var(--mono); font-size: 0.83rem; line-height: 1.9; margin: 0; }
-  .filemap .f { color: var(--magenta); }
-  .filemap .c { color: var(--band-dim); }
+  .filemap { background: var(--card); border: 1px solid var(--hairline); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); overflow-x: auto; font-family: var(--mono); font-size: 0.8rem; line-height: 1.95; margin: 0; color: var(--fg); }
+  .filemap .f { color: var(--primary); }
+  .filemap .c { color: var(--muted-fg); }
 
   /* ---- Rules ---- */
-  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .rule-card { background: var(--bg); padding: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; }
-  .rule-card h3 { font-size: 1.1rem; }
-  .rule-card p { font-size: 0.9rem; color: var(--text-dim); }
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .rule-card { background: var(--bg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.55rem; }
+  .rule-card h3 { font-size: 1.05rem; }
+  .rule-card p { font-size: 0.88rem; color: var(--muted-fg); }
 
-  /* ---- Open items ---- */
-  .open { border: 2px solid var(--accent-bold); padding: clamp(1.25rem, 3vw, 2rem); display: flex; flex-direction: column; gap: 1rem; }
-  .open ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
-  .open li::marker { font-family: var(--mono); color: var(--accent); }
+  /* ---- Built / open ---- */
+  .built { border: 1px solid var(--hairline); border-radius: var(--radius); background: var(--secondary); padding: clamp(1.25rem, 3vw, 2rem); display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+  .built .pipe { font-family: var(--mono); font-size: 0.78rem; color: var(--primary); overflow-x: auto; letter-spacing: 0.04em; }
+  .open { border: 1px solid var(--primary); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem); }
+  .open ol { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.8rem; }
+  .open li::marker { font-family: var(--mono); color: var(--primary); }
+  .open strong { color: var(--fg); }
+  .open li { color: var(--muted-fg); }
 
-  /* ---- Footer ---- */
-  footer { background: var(--band); color: var(--band-dim); padding-block: 2.5rem 3rem; font-size: 0.8rem; }
-  footer .wrap { display: flex; flex-direction: column; gap: 1rem; }
-  footer p { max-width: 80ch; }
-  footer a { color: var(--magenta); }
-  footer .disclosure { font-family: var(--mono); font-size: 0.72rem; line-height: 1.7; }
+  footer { border-top: 1px solid var(--hairline); padding-block: 2.5rem 3.5rem; color: var(--muted-fg); font-size: 0.8rem; }
+  footer .swiss { display: flex; flex-direction: column; gap: 1.1rem; }
+  footer p { max-width: 84ch; }
+  footer a { color: var(--primary); }
+  .disclosure { font-family: var(--mono); font-size: 11px; line-height: 1.8; }
 
-  a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent-bold); outline-offset: 3px; }
+  a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 
 <header class="masthead">
-  <div class="wrap">
+  <div class="swiss">
     <div class="brandline">
       <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
         <path d="M13 9.5 L20 5 L27 9.5 L24.5 12 L20 9.2 L15.5 12 Z" fill="#F235A0"/>
         <path d="M20 15 L33 34 L27.5 34 L20 23 L12.5 34 L7 34 Z" fill="#F235A0"/>
       </svg>
-      <span class="name">Striplin Ventures</span>
+      <span class="wordmark">Striplin <span class="v">Ventures</span></span>
     </div>
-    <h1>Agent <em>OS</em></h1>
+    <h1>Agent <span class="os">OS</span></h1>
     <div class="mast-foot">
       <p>The context, skills, and process files that brief the agent before any task — three departments, one company.</p>
-      <span class="value">Everyone Must Elevate</span>
+      <span class="label">Everyone Must Elevate</span>
     </div>
   </div>
 </header>
 
 <div class="notice">
-  <div class="wrap">Internal reference · Contains IBO-only figures · Not for use with prospects</div>
+  <div class="swiss">Internal reference · Contains IBO-only figures · Not for use with prospects</div>
 </div>
 
-<main class="wrap">
+<main class="swiss">
 
-  <section>
+  <section style="border-top: 0;">
     <div class="sec-head">
-      <p class="kicker">The 60-day objective</p>
+      <p class="eyebrow"><span class="num">01</span> &nbsp;The 60-day objective</p>
       <h2>Two launches, six actives</h2>
       <p>These are two different offers to two different people. The whole OS exists to keep them from collapsing into one pitch.</p>
     </div>
     <div class="figures">
-      <div class="fig"><span class="n">2</span><span class="l">Business partners launched</span></div>
-      <div class="fig"><span class="n">6</span><span class="l">eSpring reps active</span></div>
-      <div class="fig"><span class="n">3</span><span class="l">Legs sponsored → Bronze</span></div>
-      <div class="fig"><span class="n">90</span><span class="l">Day core run, 90%+ consistency</span></div>
+      <div class="fig"><span class="n">2</span><span class="label">Business partners launched</span></div>
+      <div class="fig"><span class="n">6</span><span class="label">eSpring reps active</span></div>
+      <div class="fig"><span class="n">3</span><span class="label">Legs sponsored → Bronze</span></div>
+      <div class="fig"><span class="n">90</span><span class="label">Day core run, 90%+ consistency</span></div>
     </div>
   </section>
 
   <section>
     <div class="sec-head">
-      <p class="kicker">The departments</p>
+      <p class="eyebrow"><span class="num">02</span> &nbsp;The departments</p>
       <h2>Customers / Reps / Partners</h2>
       <p>Same company, three different shapes. One owns the relationship after the sale, one is speed to a first sale, one is a selection process that duplicates itself.</p>
     </div>
@@ -301,13 +261,13 @@
       </article>
     </div>
     <div class="bridge">
-      <strong>Movement runs one way — <span style="font-family: var(--mono); color: var(--accent);">customer → rep → partner</span></strong> — and only on the person's own signal. A customer who keeps referring is a rep candidate; a rep who asks how to build their own thing is a partner candidate. Nothing moves the other direction, nobody hears two pitches in one conversation, and a service follow-up never carries a business pitch.
+      <strong>Movement runs one way — <span class="chain">customer → rep → partner</span></strong> — and only on the person's own signal. A customer who keeps referring is a rep candidate; a rep who asks how to build their own thing is a partner candidate. Nothing moves the other direction, nobody hears two pitches in one conversation, and a service follow-up never carries a business pitch.
     </div>
   </section>
 
   <section>
     <div class="sec-head">
-      <p class="kicker">Partner track · the pattern is the filter</p>
+      <p class="eyebrow"><span class="num">03</span> &nbsp;Partner track · the pattern is the filter</p>
       <h2>Conversation to launch</h2>
       <p>Each step is a read on the five qualities. Skipping one to move faster destroys the signal it was there to collect.</p>
     </div>
@@ -331,7 +291,7 @@
 
   <section>
     <div class="sec-head">
-      <p class="kicker">The offers</p>
+      <p class="eyebrow"><span class="num">04</span> &nbsp;The offers</p>
       <h2>Three, never blended</h2>
     </div>
     <div class="offers">
@@ -369,13 +329,15 @@
   </section>
 
   <section>
+    <div class="sec-head">
+      <p class="eyebrow"><span class="num">05</span> &nbsp;The rhythm</p>
+      <h2>What gets counted</h2>
+    </div>
     <div class="two-col">
-      <div class="stack" style="gap: 1.5rem;">
+      <div>
         <table>
           <caption>Weekly cadence target</caption>
-          <thead>
-            <tr><th scope="col">Activity</th><th scope="col">Per week</th></tr>
-          </thead>
+          <thead><tr><th scope="col">Activity</th><th scope="col">Per week</th></tr></thead>
           <tbody>
             <tr><td>Conversations</td><td class="num">25–30</td></tr>
             <tr><td>Make Them Aware</td><td class="num">8–12</td></tr>
@@ -383,14 +345,12 @@
             <tr><td>Meet &amp; Greet</td><td class="num">1–3</td></tr>
           </tbody>
         </table>
-        <p style="font-size: 0.88rem; color: var(--text-dim);">Tracked on the Core Run. Missing two or more days restarts the run.</p>
+        <p style="font-size: 0.85rem; color: var(--muted-fg); margin-top: 1.25rem;">Tracked on the Core Run. Missing two or more days restarts the run.</p>
       </div>
-      <div class="stack" style="gap: 1.5rem;">
+      <div>
         <table>
           <caption>Team standards</caption>
-          <thead>
-            <tr><th scope="col">Rhythm</th><th scope="col">Commitment</th></tr>
-          </thead>
+          <thead><tr><th scope="col">Rhythm</th><th scope="col">Commitment</th></tr></thead>
           <tbody>
             <tr><td class="num">Daily</td><td>Audio, 15–30 min reading, accountability app</td></tr>
             <tr><td class="num">Weekly</td><td>Owners' meeting, two mentor huddles</td></tr>
@@ -398,14 +358,14 @@
             <tr><td class="num">Quarterly</td><td>2–3 day major training event</td></tr>
           </tbody>
         </table>
-        <p style="font-size: 0.88rem; color: var(--text-dim);">$300 in customer sales — $100 × 3 within six months — is required before sponsoring anyone.</p>
+        <p style="font-size: 0.85rem; color: var(--muted-fg); margin-top: 1.25rem;">$300 in customer sales — $100 × 3 within six months — is required before sponsoring anyone.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="sec-head">
-      <p class="kicker">The operating system</p>
+      <p class="eyebrow"><span class="num">06</span> &nbsp;The operating system</p>
       <h2>What loads, and when</h2>
       <p>Only the master file loads automatically. It tells the agent what exists and which files to pull for the task at hand.</p>
     </div>
@@ -417,7 +377,8 @@
 │   ├── business_info.md     <span class="c">position, standards, compliance</span>
 │   ├── brand_voice.md       <span class="c">palette, type, tone</span>
 │   ├── offer_catalog.md     <span class="c">three offers and how they connect</span>
-│   └── compensation_plan.md <span class="c">comp plan — IBO use only</span>
+│   ├── compensation_plan.md <span class="c">comp plan — IBO use only</span>
+│   └── web_platform.md      <span class="c">the site and what's already built</span>
 ├── <span class="f">customers/</span>
 │   ├── context/icp.md
 │   └── skills/              <span class="c">conversations · lifecycle · referrals</span>
@@ -431,7 +392,7 @@
 
   <section>
     <div class="sec-head">
-      <p class="kicker">Standing rules</p>
+      <p class="eyebrow"><span class="num">07</span> &nbsp;Standing rules</p>
       <h2>How the agent behaves</h2>
     </div>
     <div class="rules">
@@ -464,14 +425,21 @@
 
   <section>
     <div class="sec-head">
-      <p class="kicker">Logged in memory</p>
-      <h2>Still open</h2>
+      <p class="eyebrow"><span class="num">08</span> &nbsp;State of play</p>
+      <h2>Built, and still open</h2>
+    </div>
+    <div class="built">
+      <p class="label">Already running</p>
+      <p>The site carries a live referral pipeline — Supabase-backed, with a referrer portal, an admin view, email notifications on submission and on bonus earned, and MCP tools an agent can drive directly.</p>
+      <p class="pipe">new → contacted → demoed → tested → closed_won / closed_lost</p>
+      <p style="color: var(--muted-fg);">Demo and dip test are separate stages, which is the right shape: a referral that reached <em>demoed</em> but never <em>tested</em> means the test that closes never happened.</p>
     </div>
     <div class="open">
       <ol>
-        <li><strong>The customer lifecycle is designed, not built.</strong> Four decisions block automation: which platform sends it, where customer records live, who answers replies, and whether rep-sold customers get their rep's follow-up or a central one.</li>
+        <li><strong>The lifecycle sequence needs three things.</strong> A customer record with install date, an SMS channel (email exists, texting doesn't), and consent capture per channel — before a single automated message goes out.</li>
+        <li><strong>Referral bonus terms are undocumented.</strong> The software has pending / earned / paid, but no amount is written down, and Amway's customer-incentive rules plus the no-income-claims rule have to be settled before quoting anything.</li>
         <li><strong>Commercial referrals need Amway verification.</strong> Customers will name coffee shops, restaurants, and bars — exactly the categories the Owner's Manual excludes. Offices and break rooms are the compliant version.</li>
-        <li><strong>Referral incentive undecided.</strong> Any reward has to clear Amway's customer-incentive rules and the no-income-claims rule. Until then, asks are made on the water story alone, with nothing promised.</li>
+        <li><strong>"Partner" means two different things.</strong> The site calls any referrer a partner; here it means a qualified Yager business partner. Renaming one would end a permanent source of confusion.</li>
         <li><strong>about_me.md is a stub.</strong> Six story questions are waiting on answers. Until they're filled in, story-driven copy gets flagged rather than invented.</li>
       </ol>
     </div>
@@ -480,8 +448,8 @@
 </main>
 
 <footer>
-  <div class="wrap">
-    <p><strong style="color: #FFFFFF;">Make Money · Make Friends · Make a Difference</strong></p>
+  <div class="swiss">
+    <p><span class="wordmark" style="font-size: 1.1rem;">Make Money · Make Friends · Make a Difference</span></p>
     <p class="disclosure">For the calendar year 2024, the average income from Amway for all U.S. registered IBOs at the Founders Platinum level and below was $723 before expenses. See <a href="https://www.amway.com/income-disclosure">amway.com/income-disclosure</a> for details and the most up-to-date information. Earnings depend on many factors, including customer base, business experience, effort, dedication, and the quality and performance of the downline sales team.</p>
     <p class="disclosure">Striplin Ventures is an independent business. Per-unit and comp plan figures on this page are internal reference for IBO use and are not for use with prospects.</p>
   </div>

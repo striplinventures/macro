@@ -83,6 +83,15 @@ file — write it there instead of re-typing it here.
   excluded categories in the Owner's Manual. Offices and break rooms are the
   compliant version. Verify with Amway before pitching any food-service or
   hospitality location.
-- Open item — `context/about_me.md` is a stub. The personal-story details it
-  lists get used in scripts; until they're filled in, story-driven copy gets
-  flagged rather than invented.
+- 2026-08-12 — Closed: `context/about_me.md` is written from Dems's own account —
+  LeafGuard glass ceiling, chasing the mentor down, the Rocky/Mickey framing, and
+  the carpet mills / *Erin Brockovich* origin of the water business. Story-driven
+  copy no longer needs flagging.
+- 2026-08-12 — **Mentorship leads the story, not the business.** The Make Aware is
+  the first part of the MG1 story, not a separate composition — MG1 opens with the
+  MA word for word and keeps going. Drafted in
+  `partners/skills/my_scripts.md`; still needs mentor review before memorizing.
+- **Open — a few story details still missing:** where Dems is from and how he got
+  to the Chattanooga area, the mentor's name and the line that stuck, the first
+  concrete win, and what the Haiti / Puerto Rico "make a difference" thread points
+  at.

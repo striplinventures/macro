@@ -69,6 +69,8 @@ Skills are SOPs. Load the one that matches the task and follow it as written.
 
 - `partners/skills/connecting.md` — Names List, Make Aware, Door to Mentorship,
   call back scripts, and the A-List customer conversation.
+- `partners/skills/my_scripts.md` — my own filled-in versions of those, plus the
+  MG1 two-minute story. Mentorship leads; the Make Aware is the story's opening.
 - `partners/skills/qualification_process.md` — the full meeting sequence from MG1
   through the offer, including MG1's 8 qualifying questions, gating material, and
   objection handling.

@@ -4,8 +4,14 @@
 
 An interactive, self-contained page for showing someone how the Amway compensation plan
 calculates income at a chosen level of eSpring sales. No install, no internet, no
-dependencies — open the file in any browser, or use the hosted link if one has been
-published.
+dependencies — open the file in any browser.
+
+**Hosted copy (private to your Claude account):**
+<https://claude.ai/code/artifact/13c6385e-dceb-40bc-85eb-732e3e17749a>
+
+Use the hosted link when you want it on a phone or a borrowed laptop. It is private until
+you share it from the page's share menu. Note that it carries the **placeholder** rates —
+see setup below.
 
 ### First-time setup (do this once, before you use it with anyone)
 
